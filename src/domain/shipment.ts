@@ -21,6 +21,8 @@ export interface Shipment {
   courier: string
   status: ShipmentStatus
   updatedAt: string
+  /** ISO timestamp used for dashboard aggregation and backend comparison. */
+  createdAt?: string
   eta: string
   amount: number
 }

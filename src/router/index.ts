@@ -27,7 +27,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to) => {
-  if (backend.provider !== 'supabase') return true
+  if (backend.provider === 'demo') return true
   if (to.meta.public) {
     try { if (await backend.getProfile()) return typeof to.query.redirect === 'string' ? to.query.redirect : '/dashboard' } catch { /* show login if session cannot be restored */ }
     return true

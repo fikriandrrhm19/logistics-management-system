@@ -44,7 +44,7 @@ export const supabaseAdapter: BackendAdapter = {
       origin: row.origin?.city || row.origin?.name || `Warehouse #${row.origin_warehouse_id}`,
       destination: row.route?.destination?.city || row.route?.destination?.name || row.receiver?.address || 'Belum ditentukan',
       courier: row.route?.courier?.profile?.full_name || row.route?.courier?.courier_code || 'Belum ditugaskan',
-      status: DB_TO_UI_STATUS[row.status] || 'Exception', updatedAt: fmtTime(row.updated_at), eta: 'Belum tersedia', amount: 0,
+      status: DB_TO_UI_STATUS[row.status] || 'Exception', updatedAt: fmtTime(row.updated_at), createdAt: row.created_at, eta: 'Belum tersedia', amount: 0,
     }))
   },
   async getSummary(): Promise<DashboardSummary> {

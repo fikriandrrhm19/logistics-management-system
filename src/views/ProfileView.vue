@@ -66,7 +66,7 @@ async function save() {
 <template>
   <PageHeading
     title="Profil saya"
-    :info="backend.provider === 'supabase' ? 'Nama disimpan di public.profiles. Anda hanya dapat mengubah nama sendiri; email dan role dikelola terpisah.' : 'Mode demo: perubahan profil hanya sementara.'"
+    :info="backend.provider === 'firebase' ? 'Nama disimpan di profil Firebase Realtime Database. Email dan role dikelola terpisah.' : backend.provider === 'supabase' ? 'Nama disimpan di public.profiles. Anda hanya dapat mengubah nama sendiri; email dan role dikelola terpisah.' : 'Mode demo: perubahan profil hanya sementara.'"
     description="Kelola informasi profil yang digunakan di workspace Trackest."
   >
     <button class="button button-secondary" :disabled="loading || saving" @click="load">Muat ulang</button>
@@ -98,7 +98,7 @@ async function save() {
         </label>
         <label>Email
           <input :value="profile.email || '—'" type="text" readonly aria-describedby="email-help" />
-          <small id="email-help">Email dikelola melalui Supabase Authentication dan tidak diubah dari halaman ini.</small>
+          <small id="email-help">{{ backend.provider === 'firebase' ? 'Email dikelola melalui Firebase Authentication dan tidak diubah dari halaman ini.' : backend.provider === 'supabase' ? 'Email dikelola melalui Supabase Authentication dan tidak diubah dari halaman ini.' : 'Email demo tidak dikelola oleh layanan autentikasi.' }}</small>
         </label>
         <label>Role
           <input :value="roleLabel" type="text" readonly aria-describedby="role-help" />

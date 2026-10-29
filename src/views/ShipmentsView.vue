@@ -135,7 +135,7 @@ function exportCsv() {
 </script>
 
 <template>
-  <PageHeading title="Pengiriman" description="Kelola pengiriman dan perbarui status melalui alur yang diizinkan." info="Perubahan status dikirim melalui RPC dan divalidasi database. ETA dan biaya belum tersedia pada skema.">
+  <PageHeading title="Pengiriman" description="Kelola pengiriman dan perbarui status melalui alur yang diizinkan." :info="backend.provider === 'firebase' ? 'Data pengiriman disimpan di Firebase Realtime Database; status dan riwayat mengikuti validasi aplikasi serta Firebase Security Rules. ETA dan biaya belum tersedia.' : backend.provider === 'supabase' ? 'Perubahan status dikirim melalui RPC dan divalidasi database. ETA dan biaya belum tersedia pada skema.' : 'Mode demo: data pengiriman bersifat sementara. ETA dan biaya belum tersedia.'">
     <button class="button button-secondary" @click="exportCsv">Ekspor CSV</button>
     <button v-if="canCreate" class="button button-primary" @click="openCreateForm">＋ Buat shipment</button>
   </PageHeading>
@@ -172,7 +172,7 @@ function exportCsv() {
         <label>Berat (kg)<input v-model.number="form.weightKg" type="number" min="0.01" step="0.01" required /></label>
         <p v-if="formError" class="route-form-error" role="alert">{{ formError }}</p>
         <div class="route-form-actions"><button type="button" class="button button-secondary" :disabled="saving" @click="modalOpen = false">Batal</button><button type="submit" class="button button-primary" :disabled="saving">{{ saving ? 'Menyimpan…' : 'Simpan shipment' }}</button></div>
-        <p class="route-form-note">{{ backend.provider === 'demo' ? 'Mode demo: data tidak persisten.' : 'Supabase: RPC create_shipment akan memvalidasi input dan membuat tracking event pertama.' }}</p>
+        <p class="route-form-note">{{ backend.provider === 'demo' ? 'Mode demo: data tidak persisten.' : backend.provider === 'firebase' ? 'Firebase: shipment dan event tracking awal disimpan ke Realtime Database.' : 'Supabase: RPC create_shipment akan memvalidasi input dan membuat tracking event pertama.' }}</p>
       </form>
     </section>
   </div>

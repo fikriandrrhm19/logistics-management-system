@@ -10,10 +10,10 @@ export interface DashboardSummary {
 
 export interface CustomerOption { id: number; fullName: string; phone: string; address: string }
 export interface WarehouseOption { id: number; name: string; city: string; address: string }
-export interface TrackingEvent { id: number; status: string; description: string; eventTime: string; warehouse: string }
+export interface TrackingEvent { id: number | string; status: string; description: string; eventTime: string; warehouse: string }
 export interface CourierOption { id: number; fullName: string; courierCode: string; active: boolean }
 export interface RouteRecord { id: number; courierId: number; courierName: string; courierCode: string; originWarehouseId: number; origin: string; destinationWarehouseId: number; destination: string; departureAt: string | null; arrivalAt: string | null; status: 'planned' | 'in_progress' | 'completed' | 'cancelled'; createdAt: string }
-export interface AuditLogRecord { id: number; shipmentId: number; trackingNumber: string; action: string; oldStatus: string | null; newStatus: string | null; changedBy: string; changedAt: string }
+export interface AuditLogRecord { id: number | string; shipmentId: number; trackingNumber: string; action: string; oldStatus: string | null; newStatus: string | null; changedBy: string; changedAt: string }
 export interface CreateRouteInput { courierId: number; originWarehouseId: number; destinationWarehouseId: number; departureAt: string | null; arrivalAt: string | null; status: 'planned' | 'in_progress' | 'completed' | 'cancelled' }
 export interface CreateWarehouseInput { name: string; city: string; address: string }
 export interface AppProfile { id: string; fullName: string; email?: string; role: 'admin' | 'staff' | 'courier' | 'customer' }

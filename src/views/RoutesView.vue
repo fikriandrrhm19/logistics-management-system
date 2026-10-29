@@ -115,7 +115,7 @@ function exportCsv() {
 </script>
 
 <template>
-  <PageHeading title="Rute pengiriman" description="Atur kurir, gudang asal dan tujuan, jadwal, serta status perjalanan." :info="backend.provider === 'supabase' ? 'Perubahan divalidasi PostgreSQL dan policy database. Jarak dan estimasi durasi belum tersedia pada skema.' : 'Mode demo: perubahan bersifat sementara. Jarak dan estimasi durasi belum tersedia.'">
+  <PageHeading title="Rute pengiriman" description="Atur kurir, gudang asal dan tujuan, jadwal, serta status perjalanan." :info="backend.provider === 'firebase' ? 'Data rute disimpan di Firebase Realtime Database dan akses mengikuti Firebase Security Rules. Jarak dan estimasi durasi belum tersedia.' : backend.provider === 'supabase' ? 'Perubahan divalidasi PostgreSQL dan policy database. Jarak dan estimasi durasi belum tersedia pada skema.' : 'Mode demo: perubahan bersifat sementara. Jarak dan estimasi durasi belum tersedia.'">
     <button class="button button-secondary" :disabled="loading || !filteredRoutes.length" @click="exportCsv">Ekspor CSV</button>
     <button v-if="canManage" class="button button-primary" @click="openCreate">＋ Tambah rute</button>
   </PageHeading>

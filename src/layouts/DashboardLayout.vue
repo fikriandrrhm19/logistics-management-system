@@ -165,7 +165,7 @@ async function logout() {
       <div class="page-content"><slot /></div>
       <footer class="app-footer">
         <span>© 2026 Trackest Logistics</span>
-        <span>{{ backend.provider === 'supabase' ? 'Supabase · v2.2.0' : 'Mode demo · v2.2.0' }}</span>
+        <span>{{ backend.provider === 'firebase' ? 'Firebase · v2.2.0' : backend.provider === 'supabase' ? 'Supabase · v2.2.0' : 'Mode demo · v2.2.0' }}</span>
       </footer>
     </main>
 

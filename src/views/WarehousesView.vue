@@ -80,7 +80,7 @@ async function saveWarehouse() {
 </script>
 
 <template>
-  <PageHeading title="Gudang" description="Kelola lokasi gudang yang digunakan untuk rute dan pengiriman." :info="backend.provider === 'supabase' ? 'Data disimpan di public.warehouses sesuai policy PostgreSQL. Kapasitas gudang belum tersedia pada skema.' : 'Mode demo: data tidak persisten. Kapasitas gudang belum tersedia.'">
+  <PageHeading title="Gudang" description="Kelola lokasi gudang yang digunakan untuk rute dan pengiriman." :info="backend.provider === 'firebase' ? 'Data gudang disimpan di Firebase Realtime Database dan akses mengikuti Firebase Security Rules. Kapasitas gudang belum tersedia.' : backend.provider === 'supabase' ? 'Data disimpan di public.warehouses sesuai policy PostgreSQL. Kapasitas gudang belum tersedia pada skema.' : 'Mode demo: data tidak persisten. Kapasitas gudang belum tersedia.'">
     <button v-if="canManage" class="button button-primary" @click="openCreate">＋ Tambah gudang</button>
   </PageHeading>
 
