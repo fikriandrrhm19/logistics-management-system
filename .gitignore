@@ -25,3 +25,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local-only Firebase experiments
+/database/firebase-rtdb.rules.json
+/docs/
+/firebase-rtdb-rules-revised.json
+/firebase.s3-s4.emulator.json
+/functions/
+/scripts/

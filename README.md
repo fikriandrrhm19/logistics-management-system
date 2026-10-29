@@ -1,24 +1,22 @@
-# Trackest - Logistics Management System
+# Trackest — Logistics Management System
 
 [![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
 [![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com/)
 
-Trackest is a web-based logistics management system for handling shipments, tracking events, delivery routes, and warehouses. It uses Vue 3 and TypeScript on the frontend, with Supabase for authentication and database operations.
-
-The project was developed for an Advanced Database Systems course and includes role-based interfaces for administrators, staff, couriers, and customers.
+Trackest is a web-based logistics management system for managing shipments, tracking history, delivery routes, and warehouses. The frontend is built with Vue 3 and TypeScript, with Supabase providing authentication and access to a PostgreSQL database.
 
 ## Features
 
-- Dashboard with shipment and logistics data
 - Shipment creation and status updates
-- Shipment tracking and tracking event history
-- Route assignment and warehouse management
-- Audit logs and user profiles
-- Role-based navigation and access controls
+- Shipment tracking and event history
+- Route assignment and management
+- Warehouse management
+- Dashboard summaries and audit logs
+- User profiles and role-based navigation
 - Search, filtering, pagination, and CSV export
-- Supabase authentication and database RPC integration
+- Supabase Auth and database RPC integration
 
 ## Tech Stack
 
@@ -26,26 +24,26 @@ The project was developed for an Advanced Database Systems course and includes r
 | --- | --- |
 | Vue 3 | Frontend framework |
 | TypeScript | Application logic and type safety |
-| Vite | Development server and build tool |
-| Supabase | Authentication, database access, and RPC |
-| PostgreSQL | Relational database |
-| SQL | Database functions and row-level security policies |
+| Vite | Development server and build tooling |
+| Supabase Auth | User authentication |
+| PostgreSQL | Relational data storage |
+| Supabase RPC | Calling database functions from the application |
 
 ## Project Structure
 
 ```text
 trackest-app/
-├── database/    # Additional SQL scripts
-├── public/      # Static assets
+├── database/       # Database-related files
+├── public/         # Static assets
 ├── src/
-│   ├── components/
-│   ├── composables/
-│   ├── domain/
-│   ├── layouts/
-│   ├── router/
-│   ├── services/
-│   ├── styles/
-│   └── views/
+│   ├── components/ # Shared UI components
+│   ├── composables/ 
+│   ├── domain/     # Domain models and status mappings
+│   ├── layouts/    # Application layouts
+│   ├── router/     # Route definitions
+│   ├── services/   # Backend clients and adapters
+│   ├── styles/     # Global styles
+│   └── views/      # Application pages
 ├── .env.example
 ├── package.json
 └── vite.config.ts
@@ -55,9 +53,9 @@ trackest-app/
 
 ### Prerequisites
 
-- Node.js version supported by Vite 8 (22.12 or later recommended)
+- Node.js compatible with Vite 8 (Node.js 22.12 or later recommended)
 - npm
-- A configured Supabase project
+- A Supabase project with the required database schema, RPC functions, and access policies configured
 
 ### Installation
 
@@ -73,37 +71,35 @@ Create a local environment file:
 cp .env.example .env.local
 ```
 
-Set the Supabase project URL and publishable or anon key in `.env.local`:
+Set the following variables in `.env.local`:
 
 ```dotenv
 VITE_BACKEND_PROVIDER=supabase
-VITE_SUPABASE_URL=https://PROJECT_REF.supabase.co
+VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
 VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY
 ```
 
-Start the development server:
+Use your project's Supabase URL and publishable/anon key. Do not put a Supabase service-role key or other privileged secret in frontend environment variables.
+
+### Development
 
 ```bash
 npm run dev
 ```
 
-To build and preview the frontend:
+### Production Build
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Current Scope
+## Configuration Notes
 
-- The Supabase adapter is the intended backend for the current application.
-- The existing database schema, RPC functions, and RLS policies must be available for the related features to work.
-- Firebase is planned as an alternative backend for the UAS implementation; its adapter is not yet a ready-to-use replacement.
-- Access controls in the interface do not replace database-level authorization. Data access must still be enforced through RLS and backend functions.
-- Build success checks compilation and bundling, not the full authentication, permissions, and role-specific workflows.
+- The application expects the Supabase schema and RPC functions used by the adapter to exist in the configured project.
+- Configure PostgreSQL Row Level Security (RLS) and policies to enforce data access. Frontend navigation and role-based UI are not substitutes for database authorization.
+- A successful production build verifies compilation and bundling; it does not verify live authentication, database policies, RPC behavior, or end-to-end workflows.
 
-## Branches
+## License
 
-- `main` - shared application baseline
-- `supabase` - Supabase implementation
-- `firebase` - planned Firebase implementation
+See [LICENSE](LICENSE) for license details.
